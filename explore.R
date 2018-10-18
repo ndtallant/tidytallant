@@ -16,7 +16,7 @@ quick.summary <- function(df){
   for (feature in rv$Feature){
     column <- df[[feature]]
     rv[i, ] <- list(feature
-                  , paste(sum(is.null(column)) / length(column), "%")
+                  , paste(round(sum(is.na(column)) / length(column), 2) * 100, "%")
                   , class(column)
                   , length(unique(column))
                   , column[1])
