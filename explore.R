@@ -27,4 +27,4 @@ quick.summary <- function(df) {
 }
 
 # This function creates a percentile rank of a vector.
-percentile_rank <- function(x) trunc(rank(x)) / length(x)
+percentile_rank <- function(x) trunc(rank(x, na.last = keep)) / sum(!is.na(x))
