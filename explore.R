@@ -3,26 +3,14 @@
 # This file has functions for quickly 
 # loading and exploring a data set.
 
-# TODO: Make this better (lol)
 # Shows each column, if it has nans, its type, and an example value
-quick.summary <- function(df) {
-  N <- length(df)
-  rv <- data.frame(Feature = colnames(df),
-                   Missing = rep(NA, N),
-                   Type = rep("", N),
-                   Uniques = rep(NA, N),
-                   Example = rep(NA, N),
+quick_summary <- function(df){
+  rv <- data.frame(Feature = names(df),
+                   Missing = sapply(df, function(x) paste(round(sum(is.na(x)) / length(x), 2) * 100, "%")),
+                   Type = sapply(df, function(x) class(x)),
+                   Uniques = sapply(df, function(x) length(unique((x)))),
+                   Example = sapply(df, function(x) x[1]),
                    stringsAsFactors = FALSE)
-  i <- 1
-  for (feature in rv$Feature) {
-    column <- df[[feature]]
-    rv[i, ] <- list(feature,
-                    paste(round(sum(is.na(column)) / length(column), 2) * 100, "%"),
-                    class(column),
-                    length(unique(column)),
-                    column[1])
-    i <- i + 1
-  }
   return(rv)
 }
 
