@@ -16,3 +16,6 @@ quick_summary <- function(df){
 
 # This function creates a percentile rank of a vector.
 percentile_rank <- function(x) trunc(rank(x, na.last = "keep")) / sum(!is.na(x))
+
+# This function lowers the column names in a dataframe.
+lower_columns <- function(df) { names(df) <- tolower(names(df)); df }
