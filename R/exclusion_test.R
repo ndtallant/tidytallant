@@ -11,9 +11,9 @@
 #'
 exclusion_test <- function(unrestricted.model, restricted.model, sig.level = 0.05) {
   df.n <- df.residual(restricted.model) - df.residual(unrestricted.model)
-  numer <- summary(unrestricted.model)$r.squared - summary(restricted.model)$r.squared / df.n
+  numer <- (summary(unrestricted.model)$r.squared - summary(restricted.model)$r.squared) / df.n
   denom <- (1 - summary(unrestricted.model)$r.squared) / df.residual(unrestricted.model)
   F <- numer / denom
   crit.val <- pf(sig.level, df.n, df.residual(unrestricted.model))
-  return(F > crit_val)
+  return(F > crit.val)
 }
